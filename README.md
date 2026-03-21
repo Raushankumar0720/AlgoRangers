@@ -438,6 +438,76 @@ docker run -p 5173:5173 -e VITE_API_URL=http://localhost:8000 algorangers-fronte
 
 ---
 
+### What is Docker?
+
+**Docker** ek containerization platform hai jo application ko ek portable container mein package karta hai. Iska matlab hai ki aapka code, uske saare dependencies (libraries, tools, settings) ek saath ek container mein encapsulated hote hain.
+
+#### Why Use Docker?
+
+| Problem Without Docker | Solution With Docker |
+|----------------------|---------------------|
+| "Works on my machine" issue | Same environment har machine par |
+| Complex setup process | Single command se setup |
+| Dependency conflicts | Isolated containers |
+| Different OS configurations | Consistent cross-platform |
+| Hard to share with team | Easy to share image |
+
+#### Docker Key Concepts:
+
+1. **Container** - Lightweight, standalone executable package jo application ko uske dependencies ke saath contain karta hai
+2. **Image** - Template/blueprint jisse container create hota hai
+3. **Dockerfile** - Text file jo instructions contain karta hai kaise image build karna hai
+4. **docker-compose.yml** - Multiple containers ko ek saath define aur run karne ka tool
+
+#### What's Used in AlgoRangers:
+
+```yaml
+# docker-compose.yml structure
+services:
+  backend:
+    build: ./backend          # Python FastAPI service
+    ports: ["8000:8000"]     # Expose API port
+    
+  frontend:
+    build: ./frontend         # React + Vite service
+    ports: ["5173:5173"]     # Expose UI port
+    depends_on: backend       # Start backend first
+```
+
+**AlgoRangers Mein Docker Components:**
+- **backend/Dockerfile**: Python 3.10-slim base image, FastAPI + dependencies
+- **frontend/Dockerfile**: Node 18-alpine base image, React + Vite
+- **docker-compose.yml**: Dono services ko orchestrate karta hai
+
+---
+
+### Production Deployment (Vercel + Render)
+
+#### Backend Deployment on Render:
+1. Connect your GitHub repo to Render
+2. Create a new Web Service
+3. Set:
+   - Build Command: `pip install -r requirements.txt`
+   - Start Command: `uvicorn main:app --host 0.0.0.0 --port $PORT`
+   - Python Version: 3.10
+4. Add environment variable: `OPENAI_API_KEY` (if using AI features)
+
+#### Frontend Deployment on Vercel:
+1. Connect your GitHub repo to Vercel
+2. Import the `frontend` folder
+3. Build Settings:
+   - Framework: Vite
+   - Build Command: `npm run build`
+   - Output Directory: `dist`
+4. Environment Variable: Add `VITE_API_URL` = your Render backend URL
+
+#### Important Notes:
+- **Render Free Tier**: Backend goes to sleep after 15 min of inactivity. First request takes 30-50 seconds.
+- **Keep Awake**: Upgrade to paid plan or use a cron job to ping the backend every 5 minutes.
+- **CORS**: Already configured to allow all origins (`*`)
+
+---
+
 ## 8. Demo Flow
 
 ```
