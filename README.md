@@ -409,32 +409,9 @@ PyMuPDF>=1.23.0
 python-dotenv>=1.0.0
 ```
 
-### Docker Setup (Recommended)
-```bash
-# Clone the repository and navigate to project folder
-cd AlgoRangers
 
-# Start all services with Docker Compose
-docker-compose up --build
 
-# Services will be available at:
-# - Frontend: http://localhost:5173
-# - Backend API: http://localhost:8000
-# - Swagger UI: http://localhost:8000/docs
-```
 
-#### Manual Docker Commands (if needed)
-```bash
-# Build and run backend only
-cd AlgoRangers/backend
-docker build -t algorangers-backend .
-docker run -p 8000:8000 -e OPENAI_API_KEY=your_key algorangers-backend
-
-# Build and run frontend only
-cd AlgoRangers/frontend
-docker build -t algorangers-frontend .
-docker run -p 5173:5173 -e VITE_API_URL=http://localhost:8000 algorangers-frontend
-```
 
 ---
 
