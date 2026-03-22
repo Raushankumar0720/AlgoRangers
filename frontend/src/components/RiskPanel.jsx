@@ -67,7 +67,7 @@ const RiskPanel = ({ risks, systemConfidence, timeEstimate }) => {
           </div>
           {timeEstimate?.estimated_completion && (
             <div className="glass px-6 py-4 rounded-3xl border border-brand-blue/20 text-center bg-brand-blue/5">
-              <span className="text-3xl font-black text-brand-blue block leading-none">{timeEstimate.total_days} Days</span>
+              <span className="text-3xl font-black text-brand-blue block leading-none">{Math.round(timeEstimate.total_days)} Days</span>
               <p className="text-xs text-surface-muted font-bold uppercase tracking-widest mt-2">Time-To-Job-Ready</p>
             </div>
           )}

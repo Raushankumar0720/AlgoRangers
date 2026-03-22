@@ -23,7 +23,7 @@ const PathCard = ({ path, isRecommended, title }) => {
           )}
         </div>
         <div className="text-right">
-          <span className="text-4xl font-black text-brand-blue">{path.total_days}</span>
+          <span className="text-4xl font-black text-brand-blue">{Math.round(path.total_days)}</span>
           <p className="text-xs text-surface-muted font-bold uppercase tracking-widest">Days Required</p>
         </div>
       </div>
@@ -87,9 +87,9 @@ const PathComparison = ({ optimalPath, alternativePath }) => {
             <div className="bg-[#0a0a0a] border border-surface-border p-3 rounded-xl mt-4 inline-flex">
               <pre className="text-xs text-brand-emerald font-mono">
                 {`{
-  "fast_time": "${fastPath?.total_days || 0} days",
-  "deep_time": "${deepPath?.total_days || 0} days",
-  "delta": "${Math.abs((deepPath?.total_days || 0) - (fastPath?.total_days || 0))} days"
+  "fast_time": "${Math.round(fastPath?.total_days || 0)} days",
+  "deep_time": "${Math.round(deepPath?.total_days || 0)} days",
+  "delta": "${Math.round(Math.abs((deepPath?.total_days || 0) - (fastPath?.total_days || 0)))} days"
 }`}
               </pre>
             </div>

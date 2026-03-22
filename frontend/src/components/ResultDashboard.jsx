@@ -170,7 +170,7 @@ const ResultDashboard = ({
           <div className="absolute -bottom-10 -left-10 w-40 h-40 bg-brand-blue/30 blur-3xl rounded-full mix-blend-screen"></div>
           
           <h2 className="text-3xl md:text-5xl font-black text-white relative z-10 tracking-tight">
-            🎯 You can be job-ready in <span className="text-brand-cyan">{trainingWeeks * 7 || 18} days</span>
+            🎯 You can be job-ready in <span className="text-brand-cyan">{Math.round(trainingWeeks * 7) || 18} days</span>
           </h2>
         </motion.div>
       )}
